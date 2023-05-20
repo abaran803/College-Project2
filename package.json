@@ -1,5 +1,5 @@
 {
-  "homepage": "http://abaran803.github.io/College-Project2",
+  "homepage": "http://abaran803.github.io/College-Project2/",
   "name": "react_dashboard",
   "version": "0.1.0",
   "private": true,
@@ -34,9 +34,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "predeploy" : "npm run build",
-    "deploy" : "gh-pages -d build",
     "build": "react-scripts build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

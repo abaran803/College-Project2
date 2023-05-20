@@ -16,6 +16,8 @@ import {
   CardMedia,
   CardContent,
   CardActions,
+  Backdrop,
+  CircularProgress,
 } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import { tokens } from "../../theme";
@@ -184,16 +186,16 @@ async function solveNQ() {
 
 
 
-    {/* <Box
+    <Box
         display={smScreen ? "flex" : "block"}
         flexDirection={smScreen ? "row" : "column"}
         justifyContent={smScreen ? "space-between" : "start"}
         alignItems={smScreen ? "center" : "start"}
         m="10px 0"
       >
-        <Header title="Rat in the Maze" subtitle="Welcome to backtracking algorithms" />
+        <Header title="N-Queen" subtitle="Welcome to backtracking algorithms" />
 
-      </Box> */}
+      </Box>
 
 
 
@@ -226,6 +228,7 @@ async function solveNQ() {
                     sx={{ height: 400 }}
                     image={poster}
                     title="green iguana"
+                    style={{backgroundColor: 'black', opacity: '0.1'}}
                   />
                 </Card> : <Board showBoard={showBoard} rowCnt={boardSize} colCnt={boardSize} />}
                 {/* <LineChart isDashboard={true} /> */}
@@ -261,7 +264,7 @@ async function solveNQ() {
             </Box>
           </Box>
         </Grid>
-        <Grid xs={12} sm={12} md={6} lg={3} xl={3}>
+        <Grid xs={12} sm={12} md={6} lg={3} xl={3} mt={2}>
         <Button variant="contained" style={{ width: '100%', backgroundColor: colors.primary[400] }} onClick={() => {setSpeed(prompt("Enter Speed"))}}>
           <Box
             width="100%"
@@ -277,7 +280,7 @@ async function solveNQ() {
           </Box>
           </Button>
         </Grid>
-        <Grid xs={12} sm={12} md={6} lg={6} xl={6}>
+        <Grid xs={12} sm={12} md={6} lg={6} xl={6} mt={2}>
         <Button variant="contained" style={{ width: '100%', backgroundColor: colors.primary[400] }} onClick={() => {setBoardSize(prompt("Enter Row Count"))}}>
           <Box
             width="100%"
@@ -293,7 +296,7 @@ async function solveNQ() {
           </Box>
           </Button>
         </Grid>
-        <Grid xs={12} sm={12} md={6} lg={3} xl={3}>
+        <Grid xs={12} sm={12} md={6} lg={3} xl={3} mt={2}>
         <Button variant="contained" style={{ width: '100%', backgroundColor: colors.primary[400] }} onClick={() => {setSpeed(prompt("Enter Speed"))}}>
           <Box
             width="100%"

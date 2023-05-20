@@ -189,7 +189,7 @@ const Ritm = ({name}) => {
 
 
 
-    {/* <Box
+    <Box
         display={smScreen ? "flex" : "block"}
         flexDirection={smScreen ? "row" : "column"}
         justifyContent={smScreen ? "space-between" : "start"}
@@ -198,7 +198,7 @@ const Ritm = ({name}) => {
       >
         <Header title="Rat in the Maze" subtitle="Welcome to backtracking algorithms" />
 
-      </Box> */}
+      </Box>
 
 
 
@@ -231,6 +231,7 @@ const Ritm = ({name}) => {
                     sx={{ height: 400 }}
                     image={poster}
                     title="green iguana"
+                    style={{backgroundColor: 'black', opacity: '0.1'}}
                   />
                 </Card> : <Board toggleBlock={toggleBlock} showBoard={showBoard} rowCnt={rowCnt} colCnt={colCnt} />}
                 {/* <LineChart isDashboard={true} /> */}
@@ -244,6 +245,7 @@ const Ritm = ({name}) => {
             maxHeight="100vh"
             overflow="auto"
             m="25px 0 0 0"
+            style={{overflowX: 'hidden'}}
           >
             <Box backgroundColor={colors.primary[400]} height="400px">
               <Typography
@@ -266,7 +268,7 @@ const Ritm = ({name}) => {
             </Box>
           </Box>
         </Grid>
-        <Grid xs={12} sm={12} md={6} lg={3} xl={3}>
+        <Grid xs={12} sm={12} md={6} lg={3} xl={3} mt={2}>
         <Button variant="contained" style={{ width: '100%', backgroundColor: colors.primary[400] }} onClick={() => {setRatSpeed(prompt("Enter Speed"))}}>
           <Box
             width="100%"
@@ -282,7 +284,7 @@ const Ritm = ({name}) => {
           </Box>
           </Button>
         </Grid>
-        <Grid xs={12} sm={12} md={6} lg={3} xl={3}>
+        <Grid xs={12} sm={12} md={6} lg={3} xl={3} mt={2}>
         <Button variant="contained" style={{ width: '100%', backgroundColor: colors.primary[400] }} onClick={() => {setRowCnt(prompt("Enter Row Count"))}}>
           <Box
             width="100%"
@@ -298,7 +300,7 @@ const Ritm = ({name}) => {
           </Box>
           </Button>
         </Grid>
-        <Grid xs={12} sm={12} md={6} lg={3} xl={3}>
+        <Grid xs={12} sm={12} md={6} lg={3} xl={3} mt={2}>
         <Button variant="contained" style={{ width: '100%', backgroundColor: colors.primary[400] }} onClick={() => {setColCnt(prompt("Enter Column Count"))}}>
           <Box
             width="100%"
@@ -314,7 +316,7 @@ const Ritm = ({name}) => {
           </Box>
           </Button>
         </Grid>
-        <Grid xs={12} sm={12} md={6} lg={3} xl={3}>
+        <Grid xs={12} sm={12} md={6} lg={3} xl={3} mt={2}>
         <Button variant="contained" style={{ width: '100%', backgroundColor: colors.primary[400] }} onClick={() => {setRatSpeed(prompt("Enter Speed"))}}>
           <Box
             width="100%"
@@ -331,7 +333,7 @@ const Ritm = ({name}) => {
           </Button>
         </Grid>
         <Grid xs={12} sm={12} md={6} lg={6} xl={6} mt={2}>
-          <Button variant="contained" style={{ width: '100%', height: 70, fontSize: '1.2rem', fontWeight: '800', backgroundColor: colors.primary[400] }} onClick={() => !showBoard ? showBoardHandler() : !started ? startAlgoHandler() : clearAll() }>
+          <Button variant="contained" style={{ width: '100%', height: 70, fontSize: '1.2rem', fontWeight: '800', backgroundColor: colors.primary[400] }} onClick={() => !showBoard ? showBoardHandler() : !started ? startAlgoHandler() : clearAll() } disabled={!(rowCnt && colCnt && ratSpeed) ? true : false}>
             {!showBoard ? 'Show Board' : !started ? 'Start' : 'Exit' }
           </Button>
         </Grid>

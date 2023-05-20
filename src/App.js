@@ -29,7 +29,7 @@ const App = () => {
         <MyProSidebarProvider>
           <div style={{ height: "100%", width: "100%" }}>
             <main>
-              <Topbar />
+              {/* <Topbar /> */}
               <Routes>
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/team" element={<Team />} />
