@@ -24,7 +24,9 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import SwitchRightOutlinedIcon from "@mui/icons-material/SwitchRightOutlined";
 import SwitchLeftOutlinedIcon from "@mui/icons-material/SwitchLeftOutlined";
+
 const Item = ({ title, to, icon, selected, setSelected }) => {
+
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -42,11 +44,14 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 };
 
 const MyProSidebar = () => {
+
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [selected, setSelected] = useState("Dashboard");
   const { sidebarRTL, setSidebarRTL, sidebarImage } = useSidebarContext();
   const { collapseSidebar, toggleSidebar, collapsed, broken } = useProSidebar();
+  const repoName = process.env.REACT_APP_REPO_NAME;
+
   return (
     <Box
       sx={{
@@ -162,7 +167,7 @@ const MyProSidebar = () => {
           <Box paddingLeft={collapsed ? undefined : "10%"}>
             <Item
               title="Dashboard"
-              to="/"
+              to={`/${repoName}/`}
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -177,21 +182,21 @@ const MyProSidebar = () => {
             </Typography>
             <Item
               title="N Queen"
-              to="/algo/nQueen"
+              to={`/${repoName}/algo/nQueen`}
               icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Sudoku Solver"
-              to="/algo/sudoku"
+              to={`/${repoName}/algo/sudoku`}
               icon={<ContactsOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Rat in the Maze"
-              to="/algo/ritm"
+              to={`/${repoName}/algo/ritm`}
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -206,21 +211,21 @@ const MyProSidebar = () => {
             </Typography>
             <Item
               title="Quizzes"
-              to="/quizzes"
+              to={`/${repoName}/quizzes`}
               icon={<PersonOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Leaderboard"
-              to="/leaderboard"
+              to={`/${repoName}/leaderboard`}
               icon={<CalendarTodayOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="About"
-              to="/about"
+              to={`/${repoName}/about`}
               icon={<HelpOutlineOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
