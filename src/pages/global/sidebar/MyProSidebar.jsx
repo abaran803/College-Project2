@@ -148,7 +148,7 @@ const MyProSidebar = () => {
                   alt="profile user"
                   width="100px"
                   height="100px"
-                  src={"../../assets/user.png"}
+                  src={"https://cdn-icons-png.flaticon.com/512/10871/10871811.png"}
                   style={{ cursor: "pointer", borderRadius: "50%" }}
                 />
               </Box>
@@ -159,7 +159,7 @@ const MyProSidebar = () => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  Team G37
+                  Group 37
                 </Typography>
               </Box>
             </Box>

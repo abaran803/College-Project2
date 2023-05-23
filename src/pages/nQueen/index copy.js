@@ -258,7 +258,7 @@ const Ritm = ({name}) => {
               </Typography>
               <Box height="250px" mt="-20px">
                 {/* <BarChart isDashboard={true} /> */}
-                <div className='code'>
+                <div className='code mt-2'>
                   <pre>
                     {selectedCode}
                   </pre>

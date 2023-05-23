@@ -10,6 +10,7 @@ import {
   useMediaQuery,
   Card,
   CardMedia,
+  CardContent,
 } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import { tokens } from "../../theme";
@@ -200,8 +201,11 @@ const Ritm = ({ name }) => {
                         sx={{ height: 400 }}
                         image={poster}
                         title="green iguana"
-                        style={{ backgroundColor: "black", opacity: "0.1" }}
+                        style={{ backgroundColor: "black", opacity: "0.07" }}
                       />
+                      <CardContent sx={{position: 'absolute', top: '40%', left: '32%'}}>
+                        <Typography variant="h1" sx={{fontWeight: '800'}}>Rat in the Maze</Typography>
+                      </CardContent>
                     </Card>
                   ) : (
                     <Board
@@ -244,7 +248,7 @@ const Ritm = ({ name }) => {
                 </Typography>
                 <Box height="250px" mt="-20px">
                   {/* <BarChart isDashboard={true} /> */}
-                  <div className="code">
+                  <div className="code mt-2">
                     <pre>{selectedCode}</pre>
                   </div>
                 </Box>
@@ -356,8 +360,9 @@ const Ritm = ({ name }) => {
                 fontWeight: "800",
                 backgroundColor: colors.primary[400],
               }}
+              onClick={() => setEditable(item => !item)}
             >
-              Block Cell
+              {!editable ? 'Block Cell' : 'Stop Blocking'}
             </Button>
           </Grid>
         </Grid>

@@ -14,6 +14,7 @@ import {
   FormControl,
   InputLabel,
   Select,
+  CardContent,
 } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import { tokens } from "../../theme";
@@ -185,13 +186,20 @@ const Ritm = ({ name }) => {
                 ></Box>
                 <Box height="400px">
                   {!showBoard || !boardSize ? (
-                    <Card>
+                    <Card sx={{ position: "relative" }}>
                       <CardMedia
                         sx={{ height: 400 }}
                         image={poster}
                         title="green iguana"
                         style={{ backgroundColor: "black", opacity: "0.1" }}
                       />
+                      <CardContent
+                        sx={{ position: "absolute", top: "40%", left: "40%" }}
+                      >
+                        <Typography variant="h1" sx={{ fontWeight: "800" }}>
+                          N-Queen
+                        </Typography>
+                      </CardContent>
                     </Card>
                   ) : (
                     <Board
@@ -218,22 +226,21 @@ const Ritm = ({ name }) => {
                   fontWeight="600"
                   sx={{ padding: "15px 30px 0 30px" }}
                 >
-                  <FormControl fullWidth>
-  <InputLabel id="demo-simple-select-label">Age</InputLabel>
-  <Select
-    labelId="demo-simple-select-label"
-    id="demo-simple-select"
-    label="Age"
-  >
-    <MenuItem value={10}>Ten</MenuItem>
-    <MenuItem value={20}>Twenty</MenuItem>
-    <MenuItem value={30}>Thirty</MenuItem>
-  </Select>
-</FormControl>
+                <select onChange={setSelectedLangHandler}>
+                  {availableLanguage.map((language, ind) => (
+                    <option
+                      selected={language === selectedLang}
+                      value={language}
+                      key={ind}
+                    >
+                      {language}
+                    </option>
+                  ))}
+                </select>
                 </Typography>
                 <Box height="250px" mt="-20px">
                   {/* <BarChart isDashboard={true} /> */}
-                  <div className="code">
+                  <div className="code mt-2">
                     <pre>{selectedCode}</pre>
                   </div>
                 </Box>

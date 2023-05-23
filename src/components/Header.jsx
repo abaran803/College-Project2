@@ -11,7 +11,7 @@ import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
+import LogoutIcon from '@mui/icons-material/Logout';
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import SearchIcon from "@mui/icons-material/Search";
 import { useProSidebar } from "react-pro-sidebar";
@@ -23,6 +23,11 @@ const Header = ({ title, subtitle }) => {
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
   const { toggleSidebar, broken, rtl } = useProSidebar();
+
+  const logoutHandler = () => {
+    localStorage.clear();
+    window.location.reload(0);
+  }
 
   return (
     <Box sx={{width: '100%'}} display="flex" justifyContent="space-between">
@@ -64,8 +69,8 @@ const Header = ({ title, subtitle }) => {
       <IconButton>
         <SettingsOutlinedIcon />
       </IconButton>
-      <IconButton>
-        <PersonOutlinedIcon />
+      <IconButton onClick={logoutHandler}>
+        <LogoutIcon />
       </IconButton>
       {broken && rtl && (
         <IconButton

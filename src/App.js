@@ -23,6 +23,7 @@ import Login from './pages/login';
 import SignUp from "./pages/signup";
 import About from "./pages/about";
 import Quizzes from "./pages/quizzes";
+import Quiz from "./pages/quiz";
 
 const App = () => {
   const [theme, colorMode] = useMode();
@@ -30,7 +31,7 @@ const App = () => {
   const isLoggedIn = JSON.parse(localStorage.getItem('auth'));
   return (
     <ColorModeContext.Provider value={colorMode}>
-      {isLoggedIn ? <Routes>
+      {!isLoggedIn ? <Routes>
         <Route path={`/${repoName}/login`} element={<Login />} />
         <Route path={`/${repoName}/signup`} element={<SignUp />} />
         <Route path='*' element={<Navigate replace to={`/${repoName}/login`} />} />
@@ -53,10 +54,10 @@ const App = () => {
                 <Route path={`/${repoName}/algo/nQueen`} element={<NQueen name='nQueen' />} />
                 <Route path={`/${repoName}/algo/ritm`} element={<RatInTheMaze name='ritm' />} />
                 <Route path={`/${repoName}/algo/sudoku`} element={<SudokuSolver name='sudoku' />} />
-                {/* <Route path="/quizzes" element={<Quizzes />} /> */}
                 <Route path={`/${repoName}/leaderboard`} element={<Leaderboard />} />
                 <Route path={`/${repoName}/about`} element={<About />} />
                 <Route path={`/${repoName}/quizzes`} element={<Quizzes />} />
+                <Route path={`/${repoName}/quiz/:algoName`} element={<Quiz />} />
                 <Route path='*' element={<Navigate replace to={`/${repoName}/`} />} />
               </Routes>
             </main>

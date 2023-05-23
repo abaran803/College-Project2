@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Box,
   Button,
@@ -6,29 +7,38 @@ import {
   useTheme,
   useMediaQuery,
   Card,
+  Backdrop,
+  TableContainer,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  Paper,
 } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import { tokens } from "../../theme";
-import { mockTransactions } from "../../data/mockData";
-import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
-import EmailIcon from "@mui/icons-material/Email";
-import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import TrafficIcon from "@mui/icons-material/Traffic";
 import Header from "../../components/Header";
-import LineChart from "../../components/LineChart";
-import GeographyChart from "../../components/GeographyChart";
-import BarChart from "../../components/BarChart";
 import StatBox from "../../components/StatBox";
-import ProgressCircle from "../../components/ProgressCircle";
 import CardMedia from "@mui/material/CardMedia";
 import { NavLink } from "react-router-dom";
 
 const Dashboard = () => {
+
   const theme = useTheme();
   const smScreen = useMediaQuery(theme.breakpoints.up("sm"));
   const colors = tokens(theme.palette.mode);
+  const [open, setOpen] = React.useState(false);
+
   const repoName = process.env.REACT_APP_REPO_NAME;
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
   return (
     <Box m="20px">
       <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
@@ -112,12 +122,80 @@ const Dashboard = () => {
                   padding: "20px 30px",
                   backgroundColor: colors.primary[400],
                 }}
+                onClick={handleOpen}
               >
-                Go to Algorithms
+                Algorithms
               </Button>
+                <Backdrop
+                  sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                  open={open}
+                  onClick={handleClose}
+                >
+                  <Grid>
+                    <TableContainer component={Paper}>
+                      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                        <TableHead sx={{backgroundColor: '#90caf9'}}>
+                          <TableRow>
+                            <TableCell sx={{fontSize: '0.9rem', color: 'black'}}>SR No.</TableCell>
+                            <TableCell sx={{fontSize: '0.9rem', color: 'black'}} align="center">Name</TableCell>
+                            <TableCell sx={{fontSize: '0.9rem', color: 'black'}} align="right">Go to Algo</TableCell>
+                          </TableRow>
+                        </TableHead>
+                        <TableBody sx={{backgroundColor: colors.primary[500]}}>
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell component="th" scope="row">
+                              1
+                            </TableCell>
+                            <TableCell align="center">N-Queen</TableCell>
+                            <TableCell align="right">
+                              <NavLink to={`/${repoName}/algo/nQueen`}>
+                                <Button size="small" variant='contained' color="info">
+                                  Click to Go
+                                </Button>
+                              </NavLink>
+                            </TableCell>
+                          </TableRow>
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell component="th" scope="row">
+                              2
+                            </TableCell>
+                            <TableCell align="center">Sudoku Solver</TableCell>
+                            <TableCell align="right">
+                              <NavLink to={`/${repoName}/algo/sudoku`}>
+                                <Button size="small" variant='contained' color="info">
+                                  Click to Go
+                                </Button>
+                              </NavLink>
+                            </TableCell>
+                          </TableRow>
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+                            <TableCell component="th" scope="row">
+                              3
+                            </TableCell>
+                            <TableCell align="center">Rat in the Maze</TableCell>
+                            <TableCell align="right">
+                              <NavLink to={`/${repoName}/algo/ritm`}>
+                                <Button size="small" variant='contained' color="info">
+                                  Click to Go
+                                </Button>
+                              </NavLink>
+                            </TableCell>
+                          </TableRow>
+                        </TableBody>
+                      </Table>
+                    </TableContainer>
+                  </Grid>
+                </Backdrop>
             </Grid>
 
             <Grid xs={12}>
+              <NavLink to={`/${repoName}/quizzes`}>
               <Button
                 variant="contained"
                 sx={{
@@ -131,6 +209,7 @@ const Dashboard = () => {
               >
                 Start Quiz
               </Button>
+              </NavLink>
             </Grid>
 
             <Grid xs={12}>

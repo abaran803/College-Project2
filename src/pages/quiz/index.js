@@ -24,27 +24,6 @@ import StatBox from "../../components/StatBox";
 import "../UiPanel.css";
 import { getCodes } from "../../services/api";
 import { MenuItem } from "react-pro-sidebar";
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import { NavLink } from "react-router-dom";
-
-
-function createData(index, name, questions, link) {
-  return { index, name, questions, link };
-}
-
-const rows = [
-  createData(1, 'N-Queen', 7, '/nQueen'),
-  createData(2, 'Sudoku Solver', 5, '/sudoku'),
-  createData(3, 'Rat in the maze', 6, '/ritm')
-];
-
-
 
 const Ritm = ({ name }) => {
   const theme = useTheme();
@@ -57,7 +36,6 @@ const Ritm = ({ name }) => {
   const [started, setStarted] = useState();
   const [selectedCode, setSelectedCode] = useState();
   const [selectedLang, setSelectedLang] = useState();
-  const repoName = process.env.REACT_APP_REPO_NAME;
 
   let queenImage = document.createElement("img");
   let queenWrapper = document.createElement("div");
@@ -179,40 +157,7 @@ const Ritm = ({ name }) => {
         <Header title="Quizzes" />
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           <Grid xs={12} sm={12} md={12} m="25px 0 0 0">
-          <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650, backgroundColor: colors.primary[400] }} aria-label="simple table">
-        <TableHead sx={{backgroundColor: '#90caf9'}}>
-          <TableRow>
-            <TableCell sx={{fontSize: '1.1rem', color: 'black'}}>SR.</TableCell>
-            <TableCell sx={{fontSize: '1.1rem', color: 'black'}}>Algorithm Name</TableCell>
-            <TableCell sx={{fontSize: '1.1rem', color: 'black'}}>No. of Questions</TableCell>
-            <TableCell sx={{fontSize: '1.1rem', color: 'black', display: 'flex', justifyContent: 'center'}}>Link</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow
-              key={row.index}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell sx={{fontSize: '0.9rem'}} component="th" scope="row">
-                {row.index}
-              </TableCell>
-              <TableCell sx={{fontSize: '0.9rem'}} component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell sx={{fontSize: '0.9rem'}}>{row.questions}</TableCell>
-              <TableCell sx={{fontSize: '0.9rem', display: 'flex', justifyContent: 'center'}}>
-                <NavLink to={`/${repoName}/quiz${row.link}`}>
-                  <Button variant="contained" color="info">Go to Quiz</Button>
-                </NavLink>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-            {/* <Card
+            <Card
               sx={{
                 backgroundColor: colors.primary[400],
                 padding: "10px 20px",
@@ -234,9 +179,9 @@ const Ritm = ({ name }) => {
                   dg fr easdS D
                 </Typography>
               </CardContent>
-            </Card> */}
+            </Card>
 
-            {/* <Grid xs={12} sm={12} md={4} lg={4} xl={4} mt={2}>
+            <Grid xs={12} sm={12} md={4} lg={4} xl={4} mt={2}>
               <Button
                 variant="contained"
                 style={{
@@ -294,7 +239,7 @@ const Ritm = ({ name }) => {
               >
                 Option 2
               </Button>
-            </Grid> */}
+            </Grid>
           </Grid>
         </Grid>
       </Box>

@@ -12,6 +12,10 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { NavLink } from 'react-router-dom';
+import { signup } from '../../services/api';
+import { Alert, Collapse, IconButton } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 
 function Copyright(props) {
   return (
@@ -29,12 +33,32 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
+
+  const [showalert, setShowalert] = React.useState();
+  const [showError, setShowError] = React.useState();
+  const [showSuccess, setShowSuccess] = React.useState();
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    if(!(await signup(
+          data.get('email'), 
+          data.get('password'), 
+          data.get('firstName') + ' ' + data.get('lastName')
+        ))) {
+      setShowalert(true);
+      setShowError(true);
+      console.log("This is error");
+      return false;
+    }
+    setShowalert(true);
+    setShowSuccess(true);
+    console.log("This is success");
     console.log({
       email: data.get('email'),
       password: data.get('password'),
+      firstName: data.get('firstName'),
+      lastName: data.get('lastName')
     });
   };
   const repoName = process.env.REACT_APP_REPO_NAME;
@@ -55,6 +79,28 @@ export default function SignUp() {
           py: 6,
           }}
         >
+        <Collapse sx={{width: '100%'}} in={showalert}>
+            <Alert
+              severity={showError ? "error" : "success"}
+              action={
+                <IconButton
+                  aria-label="close"
+                  color="inherit"
+                  size="small"
+                  onClick={() => {
+                    setShowError(false);
+                    setShowSuccess(false);
+                    setShowalert(false);
+                  }}
+                >
+                  <CloseIcon fontSize="inherit" />
+                </IconButton>
+              }
+              sx={{ mb: 2 }}
+            >
+              {showError ? "Some Error Occurred" : "Registered Successfully"}
+            </Alert>
+          </Collapse>
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
@@ -122,9 +168,9 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href={`/${repoName}/login`} variant="body2">
+                <NavLink to={`/${repoName}/login`} variant="body2">
                   Already have an account? Sign in
-                </Link>
+                </NavLink>
               </Grid>
             </Grid>
           </Box>

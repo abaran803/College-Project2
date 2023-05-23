@@ -1,3 +1,4 @@
+import React from 'react';
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -7,15 +8,34 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import { NavLink } from "react-router-dom";
+import { login } from "../../services/api";
+import { Alert, Collapse, IconButton } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 
 export default function SignIn() {
-  const handleSubmit = (event) => {
+
+  const [showalert, setShowalert] = React.useState();
+  const [showError, setShowError] = React.useState();
+
+  const isUserExist = async (email, password) => {
+    if(await login(email, password)) {
+      return true;
+    }
+    setShowalert(true);
+    setShowError(true);
+    return false;
+  }
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    console.log(await isUserExist(data.get("email"), data.get("password")));
+    if(!(await isUserExist(data.get("email"), data.get("password")))) {
+      return false;
+    }
+    localStorage.setItem('auth', JSON.stringify(true));
+    window.location.reload(0);
   };
   const repoName = process.env.REACT_APP_REPO_NAME;
 
@@ -33,6 +53,27 @@ export default function SignIn() {
           alignItems: "center",
         }}
       >
+      <Collapse sx={{width: '100%'}} in={showalert}>
+          <Alert
+            severity="error"
+            action={
+              <IconButton
+                aria-label="close"
+                color="inherit"
+                size="small"
+                onClick={() => {
+                  setShowError(false);
+                  setShowalert(false);
+                }}
+              >
+                <CloseIcon fontSize="inherit" />
+              </IconButton>
+            }
+            sx={{ mb: 2 }}
+          >
+            Some Error Occurred
+          </Alert>
+        </Collapse>
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
@@ -76,9 +117,9 @@ export default function SignIn() {
               </Link>
             </Grid>
             <Grid item>
-              <Link href={`/${repoName}/signup`} variant="body2">
+              <NavLink to={`/${repoName}/signup`} variant="body2">
                 {"Don't have an account? Sign Up"}
-              </Link>
+              </NavLink>
             </Grid>
           </Grid>
         </Box>

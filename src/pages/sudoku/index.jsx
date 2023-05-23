@@ -10,7 +10,8 @@ import {
   useTheme,
   useMediaQuery,
   Card,
-  CardMedia
+  CardMedia,
+  CardContent
 } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import { tokens } from "../../theme";
@@ -193,6 +194,9 @@ const Ritm = ({ name }) => {
                         title="green iguana"
                         style={{ backgroundColor: "black", opacity: "0.1" }}
                       />
+                      <CardContent sx={{position: 'absolute', top: '40%', left: '32%'}}>
+                        <Typography variant="h1" sx={{fontWeight: '800'}}>Sudoku Solver</Typography>
+                      </CardContent>
                     </Card>
                   )}
                   <Board
@@ -219,7 +223,7 @@ const Ritm = ({ name }) => {
                 <Typography
                   variant="h5"
                   fontWeight="600"
-                  sx={{ padding: "10px 30px 0 30px" }}
+                  sx={{ padding: "10px 30px 0 30px", position: 'static' }}
                 >
                   <select onChange={setSelectedLangHandler}>
                     {availableLanguage.map((language, ind) => (
@@ -233,7 +237,7 @@ const Ritm = ({ name }) => {
                     ))}
                   </select>
                 </Typography>
-                <Box height="250px" mt="-20px">
+                <Box height="250px">
                   {/* <BarChart isDashboard={true} /> */}
                   <div className="code">
                     <pre>{selectedCode}</pre>
