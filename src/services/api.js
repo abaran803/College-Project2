@@ -7,7 +7,7 @@ import { algo1 as javaAlgo1, algo2 as javaAlgo2, algo3 as javaAlgo3 } from '../d
 import { algo1 as pythonAlgo1, algo2 as pythonAlgo2, algo3 as pythonAlgo3 } from '../data/codes/python/algos';
 // import pythonCode from '../data/codes/python';
 
-const url = 'http://localhost:4000';
+const url = process.env.REACT_APP_URL;
 
 // Code to be shown based on language
 export const getCodes = async (lang, algo) => {
