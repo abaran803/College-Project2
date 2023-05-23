@@ -20,12 +20,12 @@ export default function BasicTable() {
   const colors = tokens(theme.palette.mode);
 
   const defaultRow = [
-    {rank: 1, name: 'person 1', quizCount: 7, score: 10},
-    {rank: 1, name: 'person 1', quizCount: 7, score: 10},
-    {rank: 1, name: 'person 1', quizCount: 7, score: 10},
-    {rank: 1, name: 'person 1', quizCount: 7, score: 10},
-    {rank: 1, name: 'person 1', quizCount: 7, score: 10},
-    {rank: 1, name: 'person 1', quizCount: 7, score: 10}
+    {rank: 1, name: 'person 1', quizCount: 7, score: 99},
+    {rank: 2, name: 'person 2', quizCount: 6, score: 75},
+    {rank: 3, name: 'person 3', quizCount: 8, score: 68},
+    {rank: 4, name: 'person 4', quizCount: 5, score: 62},
+    {rank: 5, name: 'person 5', quizCount: 3, score: 50},
+    {rank: 6, name: 'person 6', quizCount: 6, score: 46}
   ]
   
   const rows = defaultRow.map(item => (

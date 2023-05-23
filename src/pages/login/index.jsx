@@ -8,12 +8,14 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { login } from "../../services/api";
 import { Alert, Collapse, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
 export default function SignIn() {
+
+  const navigate = useNavigate();
 
   const [showalert, setShowalert] = React.useState();
   const [showError, setShowError] = React.useState();
