@@ -38,7 +38,7 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
       icon={icon}
       routerLink={<Link to={to} />}
     >
-      <Typography>{title}</Typography>
+      <Typography variant="h5">{title}</Typography>
     </MenuItem>
   );
 };
@@ -119,7 +119,7 @@ const MyProSidebar = () => {
                 ml="15px"
               >
                 <Typography variant="h3" color={colors.grey[100]}>
-                  ADMINIS
+                  
                 </Typography>
                 <IconButton
                   onClick={
@@ -164,7 +164,7 @@ const MyProSidebar = () => {
               </Box>
             </Box>
           )}
-          <Box paddingLeft={collapsed ? undefined : "10%"}>
+          <Box paddingLeft={collapsed ? undefined : "10%"} sx={{fontSize: '1rem'}}>
             <Item
               title="Dashboard"
               to={`/${repoName}/`}
@@ -174,7 +174,7 @@ const MyProSidebar = () => {
             />
 
             <Typography
-              variant="h6"
+              variant="h4"
               color={colors.grey[300]}
               sx={{ m: "15px 20px 5px 20px" }}
             >
@@ -203,7 +203,7 @@ const MyProSidebar = () => {
             />
 
             <Typography
-              variant="h6"
+              variant="h4"
               color={colors.grey[300]}
               sx={{ m: "15px 20px 5px 20px" }}
             >

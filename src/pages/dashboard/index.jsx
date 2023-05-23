@@ -41,7 +41,7 @@ const Dashboard = () => {
 
   return (
     <Box m="20px">
-      <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
+      <Header title="Backtracking Visualizer" subtitle="Welcome to backtracking visualizer" />
 
       <Grid
         container
@@ -57,7 +57,7 @@ const Dashboard = () => {
             alignItems="center"
             justifyContent="center"
           >
-            <StatBox title="User Count" subtitle={0} />
+            <StatBox title="User Count" subtitle={78} />
           </Box>
         </Grid>
 
@@ -69,7 +69,7 @@ const Dashboard = () => {
             alignItems="center"
             justifyContent="center"
           >
-            <StatBox title="Alog Count" subtitle={0} />
+            <StatBox title="Algo Count" subtitle={3} />
           </Box>
         </Grid>
 
@@ -81,7 +81,7 @@ const Dashboard = () => {
             alignItems="center"
             justifyContent="center"
           >
-            <StatBox title="High Score" subtitle={0} />
+            <StatBox title="High Score" subtitle={99} />
           </Box>
         </Grid>
 

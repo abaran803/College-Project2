@@ -23,8 +23,10 @@ import StatBox from "../../components/StatBox";
 import "../UiPanel.css";
 import { getCodes } from "../../services/api";
 import { MenuItem } from "react-pro-sidebar";
+import { NavLink } from "react-router-dom";
 
 const Ritm = ({ name }) => {
+
   const theme = useTheme();
   const smScreen = useMediaQuery(theme.breakpoints.up("sm"));
   const colors = tokens(theme.palette.mode);
@@ -35,6 +37,8 @@ const Ritm = ({ name }) => {
   const [started, setStarted] = useState();
   const [selectedCode, setSelectedCode] = useState();
   const [selectedLang, setSelectedLang] = useState();
+
+  const repoName = process.env.REACT_APP_REPO_NAME;
 
   let queenImage = document.createElement("img");
   let queenWrapper = document.createElement("div");
@@ -252,7 +256,7 @@ const Ritm = ({ name }) => {
               variant="contained"
               style={{ width: "100%", backgroundColor: colors.primary[400] }}
               onClick={() => {
-                setSpeed(prompt("Enter Speed"));
+                setSpeed(prompt("Enter Speed ( in ms )"));
               }}
             >
               <Box
@@ -286,23 +290,22 @@ const Ritm = ({ name }) => {
             </Button>
           </Grid>
           <Grid xs={12} sm={12} md={6} lg={3} xl={3} mt={2}>
-            <Button
-              variant="contained"
-              style={{ width: "100%", backgroundColor: colors.primary[400] }}
-              onClick={() => {
-                setSpeed(prompt("Enter Speed"));
-              }}
-            >
-              <Box
-                width="100%"
-                backgroundColor={colors.primary[400]}
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
+            <NavLink to={`/${repoName}/quiz/nQueen`}>
+              <Button
+                variant="contained"
+                style={{ width: "100%", backgroundColor: colors.primary[400] }}
               >
-                <StatBox title="Assessment" subtitle="Go to Quiz" />
-              </Box>
-            </Button>
+                <Box
+                  width="100%"
+                  backgroundColor={colors.primary[400]}
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                >
+                  <StatBox title="Assessment" subtitle="Go to Quiz" />
+                </Box>
+              </Button>
+            </NavLink>
           </Grid>
           <Grid xs={12} sm={12} md={6} lg={6} xl={6} mt={2}>
             <Button
@@ -336,6 +339,8 @@ const Ritm = ({ name }) => {
                 fontWeight: "800",
                 backgroundColor: colors.primary[400],
               }}
+              onClick={clearAll}
+              disabled={!started}
             >
               Reset
             </Button>

@@ -19,6 +19,7 @@ import Header from "../../components/Header";
 import StatBox from "../../components/StatBox";
 import "../UiPanel.css";
 import { getCodes } from "../../services/api";
+import { NavLink } from "react-router-dom";
 
 const Ritm = ({ name }) => {
   const theme = useTheme();
@@ -32,6 +33,8 @@ const Ritm = ({ name }) => {
   const [editable, setEditable] = useState();
   const [selectedCode, setSelectedCode] = useState();
   const [selectedLang, setSelectedLang] = useState();
+
+  const repoName = process.env.REACT_APP_REPO_NAME;
 
   let ratImage = document.createElement("img");
   ratImage.src = ratImageLogo;
@@ -251,7 +254,7 @@ const Ritm = ({ name }) => {
               variant="contained"
               style={{ width: "100%", backgroundColor: colors.primary[400] }}
               onClick={() => {
-                setSpeed(prompt("Enter Speed"));
+                setSpeed(prompt("Enter Speed ( in ms )"));
               }}
             >
               <Box
@@ -269,9 +272,6 @@ const Ritm = ({ name }) => {
             <Button
               variant="contained"
               style={{ width: "100%", backgroundColor: colors.primary[400] }}
-              onClick={() => {
-                setRowCnt(prompt("Enter Row Count"));
-              }}
               disabled
             >
               <Box
@@ -281,7 +281,7 @@ const Ritm = ({ name }) => {
                 alignItems="center"
                 justifyContent="center"
               >
-                <StatBox title={rowCnt || 0} subtitle="Row Count" />
+                <StatBox title={9} subtitle="Row Count" />
               </Box>
             </Button>
           </Grid>
@@ -289,9 +289,6 @@ const Ritm = ({ name }) => {
             <Button
               variant="contained"
               style={{ width: "100%", backgroundColor: colors.primary[400] }}
-              onClick={() => {
-                setColCnt(prompt("Enter Column Count"));
-              }}
               disabled
             >
               <Box
@@ -301,11 +298,12 @@ const Ritm = ({ name }) => {
                 alignItems="center"
                 justifyContent="center"
               >
-                <StatBox title={colCnt || 0} subtitle="Column Count" />
+                <StatBox title={9} subtitle="Column Count" />
               </Box>
             </Button>
           </Grid>
           <Grid xs={12} sm={12} md={6} lg={3} xl={3} mt={2}>
+            <NavLink to={`/${repoName}/quiz/sudoku`}>
             <Button
               variant="contained"
               style={{ width: "100%", backgroundColor: colors.primary[400] }}
@@ -323,6 +321,7 @@ const Ritm = ({ name }) => {
                 <StatBox title='Assessment' subtitle='Go to Quiz' />
               </Box>
             </Button>
+            </NavLink>
           </Grid>
           <Grid xs={12} sm={12} md={6} lg={6} xl={6} mt={2}>
             <Button

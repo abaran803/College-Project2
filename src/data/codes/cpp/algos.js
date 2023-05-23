@@ -29,12 +29,6 @@ bool isSafe(int maze[N][N], int x, int y)
     return false;
 }
 
-// This function solves the Maze problem using Backtracking.
-// It mainly uses solveMazeUtil() to solve the problem. It
-// returns false if no path is possible, otherwise return
-// true and prints the path in the form of 1s. Please note
-// that there may be more than one solutions, this function
-// prints one of the feasible solutions.
 bool solveMaze(int maze[N][N])
 {
     int sol[N][N] = { { 0, 0, 0, 0 },
@@ -59,29 +53,20 @@ bool solveMazeUtil(int maze[N][N], int x, int y, int sol[N][N])
     }
     // Check if maze[x][y] is valid
     if (isSafe(maze, x, y) == true) {
-        // Check if the current block is already part of
-        // solution path.
         if (sol[x][y] == 1)
             return false;
-        // mark x, y as part of solution path
         sol[x][y] = 1;
-        /* Move forward in x direction */
         if (solveMazeUtil(maze, x + 1, y, sol) == true)
             return true;
-        // If moving right didn't work
         // move left
         if (solveMazeUtil(maze, x - 1, y, sol) == true)
             return true;
-        // If moving in x direction doesn't give solution
         // then Move down in y direction
         if (solveMazeUtil(maze, x, y + 1, sol) == true)
             return true;
-        // If moving down didn't work
         // move up
         if (solveMazeUtil(maze, x, y - 1, sol) == true)
             return true;
-        // If none of the above movements work then
-        // BACKTRACK: unmark x, y as part of solution path
         sol[x][y] = 0;
         return false;
     }
@@ -99,8 +84,6 @@ int main()
     return 0;
 }
 
-// This code is contributed by Aditya Kumar (adityakumar129)
-// Changes made for N>4 by Ch. Abdul Wasay
     `
     return txt;
 }
@@ -125,11 +108,6 @@ void printSolution(int board[N][N])
     }
 }
 
-// A utility function to check if a queen can
-// be placed on board[row][col]. Note that this
-// function is called when "col" queens are
-// already placed in columns from 0 to col -1.
-// So we need to check only left side for
 // attacking queens
 bool isSafe(int board[N][N], int row, int col)
 {
@@ -177,26 +155,14 @@ bool solveNQUtil(int board[N][N], int col)
             if (solveNQUtil(board, col + 1))
                 return true;
 
-            // If placing queen in board[i][col]
-            // doesn't lead to a solution, then
-            // remove queen from board[i][col]
             board[i][col] = 0; // BACKTRACK
         }
     }
 
-    // If the queen cannot be placed in any row in
     // this column col  then return false
     return false;
 }
 
-// This function solves the N Queen problem using
-// Backtracking. It mainly uses solveNQUtil() to
-// solve the problem. It returns false if queens
-// cannot be placed, otherwise, return true and
-// prints placement of queens in the form of 1s.
-// Please note that there may be more than one
-// solutions, this function prints one  of the
-// feasible solutions.
 bool solveNQ()
 {
     int board[N][N] = { { 0, 0, 0, 0 },
@@ -220,7 +186,6 @@ int main()
     return 0;
 }
 
-// This code is contributed by Aditya Kumar (adityakumar129)
   `
   return txt;
 }
@@ -245,22 +210,15 @@ void print(int arr[N][N])
     }
 }
 
-// Checks whether it will be
-// legal to assign num to the
-// given row, col
 bool isSafe(int grid[N][N], int row,
                     int col, int num)
 {
     
-    // Check if we find the same num
-    // in the similar row , we
     // return false
     for (int x = 0; x <= 8; x++)
         if (grid[row][x] == num)
             return false;
 
-    // Check if we find the same num in
-    // the similar column , we
     // return false
     for (int x = 0; x <= 8; x++)
         if (grid[x][col] == num)
@@ -281,64 +239,32 @@ bool isSafe(int grid[N][N], int row,
     return true;
 }
 
-/* Takes a partially filled-in grid and attempts
-to assign values to all unassigned locations in
-such a way to meet the requirements for
-Sudoku solution (non-duplication across rows,
-columns, and boxes) */
 bool solveSudoku(int grid[N][N], int row, int col)
 {
-    // Check if we have reached the 8th
-    // row and 9th column (0
-    // indexed matrix) , we are
-    // returning true to avoid
-    // further backtracking
     if (row == N - 1 && col == N)
         return true;
 
-    // Check if column value becomes 9 ,
-    // we move to next row and
-    // column start from 0
     if (col == N) {
         row++;
         col = 0;
     }
 
-    // Check if the current position of
-    // the grid already contains
-    // value >0, we iterate for next column
     if (grid[row][col] > 0)
         return solveSudoku(grid, row, col + 1);
 
     for (int num = 1; num <= N; num++)
     {
-        
-        // Check if it is safe to place
-        // the num (1-9) in the
-        // given row ,col ->we
-        // move to next column
+
         if (isSafe(grid, row, col, num))
         {
             
-        /* Assigning the num in
-            the current (row,col)
-            position of the grid
-            and assuming our assigned
-            num in the position
-            is correct	 */
             grid[row][col] = num;
         
-            // Checking for next possibility with next
             // column
             if (solveSudoku(grid, row, col + 1))
                 return true;
         }
     
-        // Removing the assigned num ,
-        // since our assumption
-        // was wrong , and we go for
-        // next assumption with
-        // diff num value
         grid[row][col] = 0;
     }
     return false;

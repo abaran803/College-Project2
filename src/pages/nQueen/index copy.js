@@ -268,7 +268,7 @@ const Ritm = ({name}) => {
           </Box>
         </Grid>
         <Grid xs={12} sm={12} md={6} lg={3} xl={3}>
-        <Button variant="contained" style={{ width: '100%', backgroundColor: colors.primary[400] }} onClick={() => {setRatSpeed(prompt("Enter Speed"))}}>
+        <Button variant="contained" style={{ width: '100%', backgroundColor: colors.primary[400] }} onClick={() => {setRatSpeed(prompt("Enter Speed( in ms )"))}}>
           <Box
             width="100%"
             backgroundColor={colors.primary[400]}

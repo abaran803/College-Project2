@@ -63,12 +63,12 @@ const Header = ({ title, subtitle }) => {
           <DarkModeOutlinedIcon />
         )}
       </IconButton>
-      <IconButton>
+      {/* <IconButton>
         <NotificationsOutlinedIcon />
       </IconButton>
       <IconButton>
         <SettingsOutlinedIcon />
-      </IconButton>
+      </IconButton> */}
       <IconButton onClick={logoutHandler}>
         <LogoutIcon />
       </IconButton>
