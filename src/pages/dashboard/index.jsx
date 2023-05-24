@@ -41,7 +41,7 @@ const Dashboard = () => {
 
   return (
     <Box m="20px">
-      <Header title="Backtracking Visualizer" subtitle="Welcome to backtracking visualizer" />
+      <Header title="Backtracking Visualizer" subtitle="Welcome to backtracking visualizer dashboard" />
 
       <Grid
         container

@@ -159,7 +159,7 @@ const MyProSidebar = () => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  Group 37
+                  Group 35
                 </Typography>
               </Box>
             </Box>

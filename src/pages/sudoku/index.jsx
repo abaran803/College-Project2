@@ -134,6 +134,7 @@ const Ritm = ({ name }) => {
     setBoard([]);
     setStarted(false);
     setShowBoard(false);
+    window.location.reload(0);
   };
 
   const availableLanguage = ["Java", "C++", "Python"];
@@ -182,7 +183,7 @@ const Ritm = ({ name }) => {
             <Grid xs={12}>
               <Box backgroundColor={colors.primary[400]}>
                 <Box
-                  mt="25px"
+                  mt={!showBoard ? "25px" : "-10px"}
                   p="0 30px"
                   display="flex"
                   justifyContent="space-between"
