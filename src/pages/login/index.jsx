@@ -20,6 +20,8 @@ export default function SignIn() {
   const [showalert, setShowalert] = React.useState();
   const [showError, setShowError] = React.useState();
 
+  const repoName = process.env.REACT_APP_REPO_NAME;
+
   const isUserExist = async (email, password) => {
     if(await login(email, password)) {
       return true;
@@ -32,14 +34,16 @@ export default function SignIn() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log(await isUserExist(data.get("email"), data.get("password")));
+    // console.log(await isUserExist(data.get("email"), data.get("password")));
     if(!(await isUserExist(data.get("email"), data.get("password")))) {
       return false;
     }
     localStorage.setItem('auth', JSON.stringify(true));
-    window.location.reload(0);
+    setTimeout(() => {
+      // navigate(`/${repoName}/`);
+      window.location.replace(`/${repoName}/`);
+    }, 1000);
   };
-  const repoName = process.env.REACT_APP_REPO_NAME;
 
   return (
     <Container component="main" maxWidth="sm">

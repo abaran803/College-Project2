@@ -74,3 +74,15 @@ export const signup = async (email, password, name) => {
       if(!response.ok) return false;
       return response.json();
 }
+
+export const getLeaderboard = async () => {
+    const response = await fetch(`${url}/user/getLeaderBoard/0/0`);
+      if(!response.ok) return false;
+      return response.json();
+}
+
+export const getQuiz = async (algoName) => {
+    const response = await fetch(`${url}/user/getQuiz/${algoName}`);
+      if(!response.ok) return false;
+      return response.json();
+}

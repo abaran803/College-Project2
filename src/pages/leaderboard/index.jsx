@@ -10,6 +10,7 @@ import { Box, Grid } from "@mui/material";
 import Header from "../../components/Header";
 import { useTheme } from "@emotion/react";
 import { tokens } from "../../theme";
+import { getLeaderboard } from "../../services/api";
 
 function createData(rank, name, quizCount, score) {
   return {rank, name, quizCount, score};
@@ -19,18 +20,37 @@ export default function BasicTable() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const defaultRow = [
-    {rank: 1, name: 'person 1', quizCount: 7, score: 99},
-    {rank: 2, name: 'person 2', quizCount: 6, score: 75},
-    {rank: 3, name: 'person 3', quizCount: 8, score: 68},
-    {rank: 4, name: 'person 4', quizCount: 5, score: 62},
-    {rank: 5, name: 'person 5', quizCount: 3, score: 50},
-    {rank: 6, name: 'person 6', quizCount: 6, score: 46}
-  ]
-  
-  const rows = defaultRow.map(item => (
-    createData(item.rank, item.name, item.quizCount, item.score)
-  ))
+  const [rows, setRows] = React.useState();
+
+  React.useEffect(() => {
+
+    const getLeaderboardFromBackend = async () => {
+
+      const leaderboard = await getLeaderboard();
+      setRows(
+        leaderboard.map(item => (
+          createData(item.rank, item.name, item.quizCount, item.score)
+        ))
+      );
+      console.log(leaderboard);
+
+    }
+
+    getLeaderboardFromBackend();
+
+    // const defaultRow = [
+    //   {rank: 1, name: 'person 1', quizCount: 7, score: 99},
+    //   {rank: 2, name: 'person 2', quizCount: 6, score: 75},
+    //   {rank: 3, name: 'person 3', quizCount: 8, score: 68},
+    //   {rank: 4, name: 'person 4', quizCount: 5, score: 62},
+    //   {rank: 5, name: 'person 5', quizCount: 3, score: 50},
+    //   {rank: 6, name: 'person 6', quizCount: 6, score: 46}
+    // ]
+    
+    // defaultRow.forEach(item => (
+    //   rows.push(createData(item.rank, item.name, item.quizCount, item.score))
+    // ))
+  }, []);
 
   return (
     <Box m="20px" sx={{ textAlign: "center" }}>
@@ -52,7 +72,7 @@ export default function BasicTable() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map((row) => (
+                {(rows && rows.length) && rows.map((row) => (
                   <TableRow
                     key={row.name}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}

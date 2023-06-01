@@ -290,7 +290,6 @@ int main()
         cout << "no solution exists " << endl;
 
     return 0;
-    // This is code is contributed by Pradeep Mondal P
 }  
   `
   return txt;

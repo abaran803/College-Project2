@@ -56,8 +56,8 @@ const App = () => {
                 <Route path={`/${repoName}/algo/sudoku`} element={<SudokuSolver name='sudoku' />} />
                 <Route path={`/${repoName}/leaderboard`} element={<Leaderboard />} />
                 <Route path={`/${repoName}/about`} element={<About />} />
-                <Route path={`/${repoName}/quizzes`} element={<Quizzes />} />
                 <Route path={`/${repoName}/quiz/:algoName`} element={<Quiz />} />
+                <Route path={`/${repoName}/quizzes`} element={<Quizzes />} />
                 <Route path='*' element={<Navigate replace to={`/${repoName}/`} />} />
               </Routes>
             </main>

@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Board from "../Board";
 import ratImageLogo from "../../assets/rat.png";
-import poster from "../../assets/posters/nQueen.png";
 
 import {
   Box,
@@ -10,22 +8,19 @@ import {
   useTheme,
   useMediaQuery,
   Card,
-  CardMedia,
-  FormControl,
-  InputLabel,
-  Select,
   CardContent,
-  CardActions,
 } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import { tokens } from "../../theme";
 import Header from "../../components/Header";
-import StatBox from "../../components/StatBox";
 import "../UiPanel.css";
-import { getCodes } from "../../services/api";
-import { MenuItem } from "react-pro-sidebar";
+import { getCodes, getQuiz } from "../../services/api";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Ritm = ({ name }) => {
+
+  const { algoName } = useParams();
+  const navigate = useNavigate();
   const theme = useTheme();
   const smScreen = useMediaQuery(theme.breakpoints.up("sm"));
   const colors = tokens(theme.palette.mode);
@@ -36,6 +31,20 @@ const Ritm = ({ name }) => {
   const [started, setStarted] = useState();
   const [selectedCode, setSelectedCode] = useState();
   const [selectedLang, setSelectedLang] = useState();
+  const [selectedQuestionIndex, setSelectedQuestionIndex] = useState(0);
+  const [selectedOptions, setSelectedOptions] = useState();
+  const [selectedQuiz, setSelectedQuiz] = useState();
+  const repoName = process.env.REACT_APP_REPO_NAME;
+
+  useEffect(() => {
+    const getQuizFromBackend = async (algoName) => {
+      const quizList = await getQuiz(algoName);
+      setSelectedOptions(new Array(quizList.length));
+      setSelectedQuiz(quizList);
+    }
+    getQuizFromBackend(algoName);
+    console.log(algoName);
+  }, [algoName]);
 
   let queenImage = document.createElement("img");
   let queenWrapper = document.createElement("div");
@@ -151,97 +160,117 @@ const Ritm = ({ name }) => {
     setSelectedLang(e.target.value);
   };
 
+  const handleSubmit = () => {
+    alert("Submitted Successfully");
+    navigate(`/${repoName}/`);
+  }
+
   return (
     <Box m="20px">
       <Box>
         <Header title="Quizzes" />
-        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+        {(selectedQuiz && selectedQuiz.length) && <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           <Grid xs={12} sm={12} md={12} m="25px 0 0 0">
-            <Card
-              sx={{
-                backgroundColor: colors.primary[400],
-                padding: "10px 20px",
-              }}
-            >
-              <CardContent>
-                <Typography gutterBottom variant="h2" component="div">
-                  Question 1
-                </Typography>
-                <Typography
-                  variant="h4"
-                  color="text.secondary"
-                  SX={{ textAlign: "left" }}
-                  pt={1}
+            {selectedQuestionIndex !== undefined && (
+              <Card
+                sx={{
+                  backgroundColor: colors.primary[400],
+                  padding: "10px 20px",
+                }}
+              >
+                <CardContent>
+                  <Typography gutterBottom variant="h2" component="div">
+                    Question{" "}
+                    {selectedQuiz[selectedQuestionIndex].questionNumber}
+                  </Typography>
+                  <Typography
+                    variant="h4"
+                    color="text.secondary"
+                    sx={{ textAlign: "left" }}
+                    pt={1}
+                  >
+                    {selectedQuiz[selectedQuestionIndex].question}
+                  </Typography>
+                </CardContent>
+              </Card>
+            )}
+
+            <Grid xs={8} sx={{display: 'flex', flexWrap: 'wrap'}}>
+              {selectedQuestionIndex !== undefined &&
+                selectedQuiz[selectedQuestionIndex].options.map((option, index) => (
+                  <Grid xs={12} sm={12} md={6} lg={6} xl={6} mt={2}>
+                    <Button
+                      variant="contained"
+                      key={option}
+                      style={{
+                        width: "100%",
+                        height: 70,
+                        fontSize: "1.2rem",
+                        fontWeight: "800",
+                        backgroundColor: colors.primary[selectedOptions[selectedQuestionIndex] === index ? 300 : 400],
+                      }}
+                      onClick={() => {
+                        selectedOptions[selectedQuestionIndex] = index
+                        setSelectedOptions(selectedOptions)
+                        console.log(selectedOptions);
+                      }}
+                    >
+                      {option}
+                    </Button>
+                  </Grid>
+                ))}
+              </Grid>
+          </Grid>
+          <Grid xs={7} m="25px auto 0 auto" sx={{ display: "flex", position: 'absolute', bottom: '2%', right: '15%' }}>
+            <Grid xs={2}>
+              <Button
+                variant="contained"
+                style={{
+                  width: "100%",
+                  height: 70,
+                  fontSize: "1.2rem",
+                  fontWeight: "800",
+                  backgroundColor: colors.primary[400],
+                }}
+                onClick={() => setSelectedQuestionIndex((item) => item - 1)}
+                disabled={selectedQuestionIndex === 0}
+              >
+                &#x3c;
+              </Button>
+            </Grid>
+            <Grid xs={8}>
+              <Button
+                variant="contained"
+                style={{
+                  width: "100%",
+                  height: 70,
+                  fontSize: "1.2rem",
+                  fontWeight: "800",
+                  backgroundColor: colors.primary[400],
+                }}
+                onClick={handleSubmit}
+              >
+                Submit
+              </Button>
+            </Grid>
+            <Grid xs={2}>
+              <Button
+                variant="contained"
+                style={{
+                  width: "100%",
+                  height: 70,
+                  fontSize: "1.2rem",
+                  fontWeight: "800",
+                  backgroundColor: colors.primary[400],
+                }}
+                onClick={() => setSelectedQuestionIndex((item) => item + 1)}
+                disabled={selectedQuestionIndex === selectedQuiz.length - 1}
+              >
                 >
-                  Lizards are a widespread group of squamate reptiles, with over
-                  6,000 species, ranging across all continents except Antarctica
-                  jidfovv erdsg fwt egdft y hrtd yfdt hgd f vrefds hy t ergfdfh
-                  dg fr easdS D
-                </Typography>
-              </CardContent>
-            </Card>
-
-            <Grid xs={12} sm={12} md={4} lg={4} xl={4} mt={2}>
-              <Button
-                variant="contained"
-                style={{
-                  width: "100%",
-                  height: 70,
-                  fontSize: "1.2rem",
-                  fontWeight: "800",
-                  backgroundColor: colors.primary[400],
-                }}
-              >
-                Option 2
-              </Button>
-            </Grid>
-
-            <Grid xs={12} sm={12} md={4} lg={4} xl={4} mt={2}>
-              <Button
-                variant="contained"
-                style={{
-                  width: "100%",
-                  height: 70,
-                  fontSize: "1.2rem",
-                  fontWeight: "800",
-                  backgroundColor: 'royalblue',
-                }}
-              >
-                Option 2
-              </Button>
-            </Grid>
-
-            <Grid xs={12} sm={12} md={4} lg={4} xl={4} mt={2}>
-              <Button
-                variant="contained"
-                style={{
-                  width: "100%",
-                  height: 70,
-                  fontSize: "1.2rem",
-                  fontWeight: "800",
-                  backgroundColor: colors.primary[400],
-                }}
-              >
-                Option 2
-              </Button>
-            </Grid>
-
-            <Grid xs={12} sm={12} md={4} lg={4} xl={4} mt={2}>
-              <Button
-                variant="contained"
-                style={{
-                  width: "100%",
-                  height: 70,
-                  fontSize: "1.2rem",
-                  fontWeight: "800",
-                  backgroundColor: colors.primary[400],
-                }}
-              >
-                Option 2
               </Button>
             </Grid>
           </Grid>
-        </Grid>
+        </Grid>}
       </Box>
     </Box>
   );
