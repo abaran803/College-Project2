@@ -210,9 +210,9 @@ const Ritm = ({ name }) => {
                         backgroundColor: colors.primary[selectedOptions[selectedQuestionIndex] === index ? 300 : 400],
                       }}
                       onClick={() => {
-                        selectedOptions[selectedQuestionIndex] = index
-                        setSelectedOptions(selectedOptions)
-                        console.log(selectedOptions);
+                        const newSelectedOptions = [...selectedOptions];
+                        newSelectedOptions[selectedQuestionIndex] = index
+                        setSelectedOptions(newSelectedOptions);
                       }}
                     >
                       {option}
