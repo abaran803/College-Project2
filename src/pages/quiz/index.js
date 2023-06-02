@@ -161,7 +161,14 @@ const Ritm = ({ name }) => {
   };
 
   const handleSubmit = () => {
-    alert("Submitted Successfully");
+    let score = 0;
+    for(let i = 0; i<selectedOptions.length; i++) {
+      if(selectedQuiz[i].correctAnsInd === selectedOptions[i]) {
+        score += 10;
+      }
+    }
+    console.log(score);
+    alert(`Submitted Successfully. Score: ${score}` );
     navigate(`/${repoName}/`);
   }
 
