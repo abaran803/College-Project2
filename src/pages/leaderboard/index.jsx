@@ -11,6 +11,7 @@ import Header from "../../components/Header";
 import { useTheme } from "@emotion/react";
 import { tokens } from "../../theme";
 import { getLeaderboard } from "../../services/api";
+import Loading from '../../components/Loading';
 
 function createData(rank, name, quizCount, score) {
   return {rank, name, quizCount, score};
@@ -21,18 +22,20 @@ export default function BasicTable() {
   const colors = tokens(theme.palette.mode);
 
   const [rows, setRows] = React.useState();
+  const [loading, setLoading] = React.useState();
 
   React.useEffect(() => {
 
     const getLeaderboardFromBackend = async () => {
 
+      setLoading(true);
       const leaderboard = await getLeaderboard();
       setRows(
         leaderboard.map(item => (
           createData(item.rank, item.name, item.quizCount, item.score)
         ))
       );
-      console.log(leaderboard);
+      setLoading(false);
 
     }
 
@@ -51,6 +54,10 @@ export default function BasicTable() {
     //   rows.push(createData(item.rank, item.name, item.quizCount, item.score))
     // ))
   }, []);
+
+  if(loading) {
+    return <Loading />
+  }
 
   return (
     <Box m="20px" sx={{ textAlign: "center" }}>

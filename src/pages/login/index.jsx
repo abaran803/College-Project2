@@ -12,6 +12,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { login } from "../../services/api";
 import { Alert, Collapse, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import Loading from '../../components/Loading';
 
 export default function SignIn() {
 
@@ -19,6 +20,7 @@ export default function SignIn() {
 
   const [showalert, setShowalert] = React.useState();
   const [showError, setShowError] = React.useState();
+  const [loading, setLoading] = React.useState();
 
   const repoName = process.env.REACT_APP_REPO_NAME;
 
@@ -33,6 +35,7 @@ export default function SignIn() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
     const data = new FormData(event.currentTarget);
     // console.log(await isUserExist(data.get("email"), data.get("password")));
     if(!(await isUserExist(data.get("email"), data.get("password")))) {
@@ -44,6 +47,10 @@ export default function SignIn() {
       window.location.replace(`/${repoName}/`);
     }, 1000);
   };
+
+  if(loading) {
+    return <Loading />
+  }
 
   return (
     <Container component="main" maxWidth="sm">

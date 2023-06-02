@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ratImageLogo from "../../assets/rat.png";
+import Loading from '../../components/Loading';
 
 import {
   Box,
@@ -34,16 +35,18 @@ const Ritm = ({ name }) => {
   const [selectedQuestionIndex, setSelectedQuestionIndex] = useState(0);
   const [selectedOptions, setSelectedOptions] = useState();
   const [selectedQuiz, setSelectedQuiz] = useState();
+  const [loading, setLoading] = useState();
   const repoName = process.env.REACT_APP_REPO_NAME;
 
   useEffect(() => {
     const getQuizFromBackend = async (algoName) => {
+      setLoading(true);
       const quizList = await getQuiz(algoName);
       setSelectedOptions(new Array(quizList.length));
       setSelectedQuiz(quizList);
+      setLoading(false);
     }
     getQuizFromBackend(algoName);
-    console.log(algoName);
   }, [algoName]);
 
   let queenImage = document.createElement("img");
@@ -170,6 +173,10 @@ const Ritm = ({ name }) => {
     console.log(score);
     alert(`Submitted Successfully. Score: ${score}` );
     navigate(`/${repoName}/`);
+  }
+
+  if(loading) {
+    return <Loading />
   }
 
   return (

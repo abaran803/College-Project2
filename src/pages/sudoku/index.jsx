@@ -20,6 +20,7 @@ import StatBox from "../../components/StatBox";
 import "../UiPanel.css";
 import { getCodes } from "../../services/api";
 import { NavLink } from "react-router-dom";
+import Loading from '../../components/Loading';
 
 const Ritm = ({ name }) => {
   const theme = useTheme();
@@ -33,6 +34,7 @@ const Ritm = ({ name }) => {
   const [editable, setEditable] = useState();
   const [selectedCode, setSelectedCode] = useState();
   const [selectedLang, setSelectedLang] = useState();
+  const [loading, setLoading] = useState();
 
   const repoName = process.env.REACT_APP_REPO_NAME;
 
@@ -145,8 +147,10 @@ const Ritm = ({ name }) => {
 
   useEffect(() => {
     const selectedCode = async () => {
+      setLoading(true);
       const code = await getCodes(selectedLang || "C++", name);
       setSelectedCode(code);
+      setLoading(false);
     };
     selectedCode();
   }, [selectedLang, name]);
@@ -154,6 +158,10 @@ const Ritm = ({ name }) => {
   const setSelectedLangHandler = (e) => {
     setSelectedLang(e.target.value);
   };
+
+  if(loading) {
+    return <Loading />
+  }
 
   return (
     <Box m="20px">

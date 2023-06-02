@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Board from "../Board";
 import ratImageLogo from "../../assets/rat.png";
 import poster from "../../assets/posters/nQueen.png";
+import Loading from '../../components/Loading';
 
 import {
   Box,
@@ -37,6 +38,7 @@ const Ritm = ({ name }) => {
   const [started, setStarted] = useState();
   const [selectedCode, setSelectedCode] = useState();
   const [selectedLang, setSelectedLang] = useState();
+  const [loading, setLoading] = useState();
 
   const repoName = process.env.REACT_APP_REPO_NAME;
 
@@ -144,8 +146,10 @@ const Ritm = ({ name }) => {
 
   useEffect(() => {
     const selectedCode = async () => {
+      setLoading(true);
       const code = await getCodes(selectedLang || "C++", name);
       setSelectedCode(code);
+      setLoading(false);
     };
     selectedCode();
   }, [selectedLang, name]);
@@ -153,6 +157,10 @@ const Ritm = ({ name }) => {
   const setSelectedLangHandler = (e) => {
     setSelectedLang(e.target.value);
   };
+
+  if(loading) {
+    <Loading />
+  }
 
   return (
     <Box m="20px">
